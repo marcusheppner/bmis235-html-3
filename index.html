@@ -34,10 +34,263 @@
 <p>For more fantasy football data, click here: <a href="https://fantasydata.com">Fantasy Data</a></p>
 <p>For inquiries regarding player rankings, <a href="mailto:mheppner@zagmail.gonzaga.edu">Email me</a></p>
 
-<!-- ===== SAVE THIS SPACE ==============================================
-     This box is empty on purpose. Leave it here. We will use it later.
-     ===================================================================== -->
-<div class="showcase"></div>
+<!-- ============================================================
+     HTML: the three player cards. Each card is a button with a
+     front (name) and a back (stats). Edit the numbers right here.
+     ============================================================ -->
+<div class="showcase-wrap">
+  <div class="showcase-title">The Hall of Famers</div>
+  <div class="showcase-hint">Tap a card to see the season stats</div>
+
+  <div class="showcase-row">
+
+    <!-- Card 1: Austin Ekeler -->
+    <button class="showcase-card" type="button" aria-pressed="false">
+      <span class="showcase-inner">
+        <span class="showcase-face showcase-front">
+          <span class="showcase-year">'22</span>
+          <span class="showcase-name">Austin Ekeler</span>
+          <span class="showcase-pos">RB · Chargers</span>
+          <span class="showcase-flip">Tap to flip ↻</span>
+        </span>
+        <span class="showcase-face showcase-back">
+          <span class="showcase-back-title">Ekeler · 2022</span>
+          <span class="showcase-stat"><span>Rush yards</span><b>915</b></span>
+          <span class="showcase-stat"><span>Rush TDs</span><b>13</b></span>
+          <span class="showcase-stat"><span>Receptions</span><b>107</b></span>
+          <span class="showcase-stat"><span>Rec yards</span><b>722</b></span>
+          <span class="showcase-stat"><span>Total TDs</span><b>18</b></span>
+          <span class="showcase-note">Led the NFL in touchdowns</span>
+        </span>
+      </span>
+    </button>
+
+    <!-- Card 2: Joe Burrow -->
+    <button class="showcase-card" type="button" aria-pressed="false">
+      <span class="showcase-inner">
+        <span class="showcase-face showcase-front">
+          <span class="showcase-year">'26</span>
+          <span class="showcase-name">Joe Burrow</span>
+          <span class="showcase-pos">QB · Bengals</span>
+          <span class="showcase-flip">Tap to flip ↻</span>
+        </span>
+        <span class="showcase-face showcase-back">
+          <span class="showcase-back-title">Burrow · 2026</span>
+          <span class="showcase-stat"><span>Pass yards</span><b>2,115</b></span>
+          <span class="showcase-stat"><span>Pass TDs</span><b>20</b></span>
+          <span class="showcase-stat"><span>INTs</span><b>6</b></span>
+          <span class="showcase-stat"><span>Games</span><b>7</b></span>
+          <span class="showcase-note">Season in progress</span>
+        </span>
+      </span>
+    </button>
+
+    <!-- Card 3: Michael Wilson -->
+    <button class="showcase-card" type="button" aria-pressed="false">
+      <span class="showcase-inner">
+        <span class="showcase-face showcase-front">
+          <span class="showcase-year">'25</span>
+          <span class="showcase-name">Michael Wilson</span>
+          <span class="showcase-pos">WR · Cardinals</span>
+          <span class="showcase-flip">Tap to flip ↻</span>
+        </span>
+        <span class="showcase-face showcase-back">
+          <span class="showcase-back-title">Wilson · 2025</span>
+          <span class="showcase-stat"><span>Receptions</span><b>78</b></span>
+          <span class="showcase-stat"><span>Rec yards</span><b>1,006</b></span>
+          <span class="showcase-stat"><span>TDs</span><b>7</b></span>
+          <span class="showcase-stat"><span>Targets</span><b>124</b></span>
+          <span class="showcase-stat"><span>Yds / catch</span><b>12.9</b></span>
+          <span class="showcase-note">First 1,000-yard season</span>
+        </span>
+      </span>
+    </button>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     CSS: colors, card size, and the flip animation. Every rule
+     starts with .showcase so it only affects this graphic.
+     ============================================================ -->
+<style>
+  .showcase {
+    --sc-main: #C2E6F5;
+    --sc-accent: #154861;
+    font-family: Optima, Candara, "Segoe UI", sans-serif;
+    color: var(--sc-accent);
+    max-height: 500px;
+    margin: 30px auto;
+  }
+  .showcase .showcase-wrap {
+    text-align: center;
+  }
+  .showcase .showcase-title {
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .showcase .showcase-hint {
+    font-size: 15px;
+    font-weight: normal;
+    margin: 4px 0 18px;
+  }
+
+  /* row of cards: side by side on a computer, swipe sideways on a phone */
+  .showcase .showcase-row {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 6px 4px 12px;
+  }
+
+  /* the card itself (a button, so it also works with the keyboard) */
+  .showcase .showcase-card {
+    flex: 0 0 200px;
+    height: 280px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    perspective: 900px;
+    scroll-snap-align: center;
+    font: inherit;
+    color: inherit;
+  }
+  .showcase .showcase-card:focus-visible {
+    outline: 3px solid var(--sc-accent);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+
+  /* the part that spins */
+  .showcase .showcase-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+  }
+  .showcase .showcase-card.is-flipped .showcase-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* front and back share the same box */
+  .showcase .showcase-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px double #ffffff;
+    box-shadow: 0 0 0 3px var(--sc-accent);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* FRONT: dark blue with baby blue text */
+  .showcase .showcase-front {
+    background-color: var(--sc-accent);
+    color: var(--sc-main);
+  }
+  .showcase .showcase-year {
+    font-size: 54px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .showcase .showcase-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 14px;
+    line-height: 1.2;
+  }
+  .showcase .showcase-pos {
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 6px;
+  }
+  .showcase .showcase-flip {
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: 22px;
+    opacity: 0.8;
+  }
+
+  /* BACK: baby blue with dark blue text */
+  .showcase .showcase-back {
+    background-color: var(--sc-main);
+    color: var(--sc-accent);
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+  }
+  .showcase .showcase-back-title {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid var(--sc-accent);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .showcase .showcase-stat {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 15px;
+    font-weight: normal;
+    padding: 4px 0;
+    border-bottom: 1px dotted rgba(21, 72, 97, 0.35);
+  }
+  .showcase .showcase-stat b {
+    font-weight: bold;
+  }
+  .showcase .showcase-note {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: auto;
+  }
+
+  /* phones: slightly smaller cards, start the row at the left so you can swipe */
+  @media (max-width: 680px) {
+    .showcase .showcase-row {
+      justify-content: flex-start;
+    }
+    .showcase .showcase-card {
+      flex-basis: 180px;
+      height: 260px;
+    }
+    .showcase .showcase-year {
+      font-size: 46px;
+    }
+  }
+
+  /* people who turn off animations in their settings get an instant flip */
+  @media (prefers-reduced-motion: reduce) {
+    .showcase .showcase-inner {
+      transition: none;
+    }
+  }
+</style>
+
+<!-- ============================================================
+     JavaScript: when a card is clicked, flip it over (or back).
+     ============================================================ -->
+<script>
+  (function () {
+    var cards = document.querySelectorAll(".showcase .showcase-card");
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        var flipped = card.classList.toggle("is-flipped");
+        card.setAttribute("aria-pressed", flipped ? "true" : "false");
+      });
+    });
+  })();
+</script>
 
 <!-- Footer: fill in your name -->
 <footer>Built by Marcus Heppner &middot; BMIS 235</footer>
