@@ -38,7 +38,288 @@
      HTML: the three player cards. Each card is a button with a
      front (name) and a back (stats). Edit the numbers right here.
      ============================================================ -->
-<div class="showcase"></div>
+<div class="showcase">
+  <div class="showcase hof">
+  <div class="hof-title">The Hall of Famers</div>
+  <div class="hof-hint">Click a card to flip it</div>
+
+  <div class="hof-row">
+
+    <!-- Card 1: Austin Ekeler -->
+    <div class="hof-card" role="button" tabindex="0" aria-pressed="false">
+      <div class="hof-inner">
+        <div class="hof-face hof-front">
+          <span class="hof-corner hof-tl">'22</span>
+          <span class="hof-corner hof-br">'22</span>
+          <span class="hof-name">Austin<br>Ekeler</span>
+          <span class="hof-pos">RB · Chargers</span>
+          <span class="hof-tap">Click to flip ↻</span>
+        </div>
+        <div class="hof-face hof-back">
+          <span class="hof-corner hof-tl">'22</span>
+          <span class="hof-corner hof-br">'22</span>
+          <span class="hof-back-title">2022 Season</span>
+          <span class="hof-stat"><b>915</b> rush yards</span>
+          <span class="hof-stat"><b>13</b> rush TDs</span>
+          <span class="hof-stat"><b>107</b> receptions</span>
+          <span class="hof-stat"><b>722</b> rec yards</span>
+          <span class="hof-stat"><b>18</b> total TDs</span>
+          <span class="hof-note">Led the NFL in TDs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Joe Burrow -->
+    <div class="hof-card" role="button" tabindex="0" aria-pressed="false">
+      <div class="hof-inner">
+        <div class="hof-face hof-front">
+          <span class="hof-corner hof-tl">'26</span>
+          <span class="hof-corner hof-br">'26</span>
+          <span class="hof-name">Joe<br>Burrow</span>
+          <span class="hof-pos">QB · Bengals</span>
+          <span class="hof-tap">Click to flip ↻</span>
+        </div>
+        <div class="hof-face hof-back">
+          <span class="hof-corner hof-tl">'26</span>
+          <span class="hof-corner hof-br">'26</span>
+          <span class="hof-back-title">2026 Season</span>
+          <span class="hof-stat"><b>2,115</b> pass yards</span>
+          <span class="hof-stat"><b>20</b> pass TDs</span>
+          <span class="hof-stat"><b>6</b> INTs</span>
+          <span class="hof-stat"><b>7</b> games</span>
+          <span class="hof-note">Season in progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Michael Wilson -->
+    <div class="hof-card" role="button" tabindex="0" aria-pressed="false">
+      <div class="hof-inner">
+        <div class="hof-face hof-front">
+          <span class="hof-corner hof-tl">'25</span>
+          <span class="hof-corner hof-br">'25</span>
+          <span class="hof-name">Michael<br>Wilson</span>
+          <span class="hof-pos">WR · Cardinals</span>
+          <span class="hof-tap">Click to flip ↻</span>
+        </div>
+        <div class="hof-face hof-back">
+          <span class="hof-corner hof-tl">'25</span>
+          <span class="hof-corner hof-br">'25</span>
+          <span class="hof-back-title">2025 Season</span>
+          <span class="hof-stat"><b>78</b> receptions</span>
+          <span class="hof-stat"><b>1,006</b> rec yards</span>
+          <span class="hof-stat"><b>7</b> TDs</span>
+          <span class="hof-stat"><b>124</b> targets</span>
+          <span class="hof-stat"><b>12.9</b> yds / catch</span>
+          <span class="hof-note">First 1,000-yard season</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     CSS: centering, playing-card shape, colors and the flip.
+     Every rule starts with .showcase so nothing else changes.
+     ============================================================ -->
+<style>
+  .showcase.hof {
+    font-family: Optima, Candara, "Segoe UI", sans-serif;
+    color: #154861;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    box-sizing: border-box;
+  }
+  .showcase.hof .hof-title {
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .showcase.hof .hof-hint {
+    font-size: 15px;
+    font-weight: normal;
+    margin: 4px 0 10px;
+  }
+
+  /* cards side by side, centered, with space between */
+  .showcase.hof .hof-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    padding: 20px;
+  }
+
+  /* playing-card size (2.5 x 3.5 ratio) */
+  .showcase.hof .hof-card {
+    flex: 0 0 180px;
+    width: 180px;
+    height: 252px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .showcase.hof .hof-card:focus-visible {
+    outline: 3px solid #154861;
+    outline-offset: 6px;
+    border-radius: 14px;
+  }
+
+  /* the part that spins */
+  .showcase.hof .hof-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+  .showcase.hof .hof-card.is-flipped .hof-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* both sides: dark blue card, baby blue text, card-style frame */
+  .showcase.hof .hof-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 26px 14px;
+    background-color: #154861;
+    color: #C2E6F5;
+    border-radius: 12px;
+    border: 2px solid #C2E6F5;
+    box-shadow: 0 0 0 4px #154861, 0 8px 16px rgba(0, 0, 0, 0.25);
+    outline: 1px solid rgba(194, 230, 245, 0.5);
+    outline-offset: -9px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: visibility 0s 0.3s;
+  }
+
+  /* back starts turned around and hidden */
+  .showcase.hof .hof-back {
+    transform: rotateY(180deg);
+    visibility: hidden;
+  }
+  .showcase.hof .hof-card.is-flipped .hof-back {
+    visibility: visible;
+  }
+  .showcase.hof .hof-card.is-flipped .hof-front {
+    visibility: hidden;
+  }
+
+  /* year in the corners, like a playing card's number */
+  .showcase.hof .hof-corner {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .showcase.hof .hof-tl {
+    top: 14px;
+    left: 16px;
+  }
+  .showcase.hof .hof-br {
+    bottom: 14px;
+    right: 16px;
+    transform: rotate(180deg);
+  }
+
+  /* front text */
+  .showcase.hof .hof-name {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1.15;
+  }
+  .showcase.hof .hof-pos {
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 10px;
+  }
+  .showcase.hof .hof-tap {
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 18px;
+    opacity: 0.75;
+  }
+
+  /* back text: stats stacked one on top of the other */
+  .showcase.hof .hof-back-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #C2E6F5;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+  .showcase.hof .hof-stat {
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+    padding: 2px 0;
+  }
+  .showcase.hof .hof-stat b {
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .showcase.hof .hof-note {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 8px;
+    opacity: 0.85;
+  }
+
+  /* phones: cards stay side by side; swipe left and right to see all three */
+  @media (max-width: 680px) {
+    .showcase.hof .hof-row {
+      justify-content: flex-start;
+      gap: 24px;
+      overflow-x: auto;
+    }
+  }
+
+  /* instant flip for people who turn off animations */
+  @media (prefers-reduced-motion: reduce) {
+    .showcase.hof .hof-inner {
+      transition: none;
+    }
+  }
+</style>
+
+<!-- ============================================================
+     JavaScript: click a card (or press Enter/Space on it) to flip
+     it to the stats, and click again to flip it back.
+     ============================================================ -->
+<script>
+  (function () {
+    var cards = document.querySelectorAll(".showcase.hof .hof-card");
+    for (var i = 0; i < cards.length; i++) {
+      (function (card) {
+        function flip() {
+          var flipped = card.classList.toggle("is-flipped");
+          card.setAttribute("aria-pressed", flipped ? "true" : "false");
+        }
+        card.addEventListener("click", flip);
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            flip();
+          }
+        });
+      })(cards[i]);
+    }
+  })();
+</script>
+</div>
 
 <!-- Footer: fill in your name -->
 <footer>Built by Marcus Heppner &middot; BMIS 235</footer>
