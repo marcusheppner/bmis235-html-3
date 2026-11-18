@@ -10,9 +10,10 @@
    ===================================================================== */
 
 body {
-    font-family: Georgia, "Times New Roman", serif;
-    background-color: #f4efe6;
-    color: #2b2b2b;
+    font-family: Optima, Candara, "Segoe UI", sans-serif;
+    font-weight: bold;
+    background-color: #C2E6F5;
+    color: #154861;
     margin: 0;
     padding: 0 20px 40px 20px;
 }
