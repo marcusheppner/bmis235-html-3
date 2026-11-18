@@ -26,6 +26,16 @@ nav {
     margin: 0 -20px;
 }
 
+/* links in the page text */
+a {
+    color: #2E5D8C;
+}
+
+a:hover {
+    color: #154861;
+    text-decoration: none;
+}
+
 /* every image inside the menu is forced to the same height.
    If your images still look different sizes, their WIDTHS are
    different: go back to Excel and make every cell the same size. */
